@@ -18,7 +18,7 @@ Vector
 Зависимости
 ------------
 
-Для корректной работы понадорится также установить СУБД Clickhouse (роль доступна по [ссылке](https://github.com/LeonidKhoroshev/clickhouse-role)) и графический интерфейл Lighthouse (роль доступна по [ссылке](https://github.com/LeonidKhoroshev/lighthouse) ). В сулчае, если базы данных, Vector и Lighthouse предполагается устанавливать на разных хостах, также потребуется веб-сервер (роль для установки Nginx доступна по [ссылке](https://github.com/LeonidKhoroshev/nginx)).
+Для корректной работы понадорится также установить СУБД Clickhouse (роль доступна по [ссылке](https://github.com/LeonidKhoroshev/clickhouse-role)) и графический интерфейc Lighthouse (роль доступна по [ссылке](https://github.com/LeonidKhoroshev/lighthouse) ). В сулчае, если базы данных, Vector и Lighthouse предполагается устанавливать на разных хостах, также потребуется веб-сервер (роль для установки Nginx доступна по [ссылке](https://github.com/LeonidKhoroshev/nginx)).
 
 Пример плейбука
 ----------------
