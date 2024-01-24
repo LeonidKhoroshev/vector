@@ -1,25 +1,49 @@
-Role Name
+Vector
 =========
 
-A brief description of the role goes here.
+Комбайн для обработки данных из баз данных, позволяющий преобразовывать их журналы и метрики для удобного отображения в тексте, либо в графическом виде.
 
-Requirements
+Требования
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+На настраиваемых хостах должна быть уствновлена ОС Linux (RPM линейка), так как установка производится пакетным менеджером yum. Поскольку Vector крайне требователен к системным ресурсам, рекомендуется его установка на хосты с ек менее 4 Гб оперативной памяти и 2 Гб места на жестком диске (указаны минимальные параметры, оптимальные параметры зависят от объема обрабатываемых данных).
 
-Role Variables
+Переменные
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+Данная роль доступна к использованию без переменных, так как все значения прописаны в коде. При необходимости можно изменить отдельные настройки, такие как версия ПО (по умолчанию доступна версия "0.35.0") и имя пользователя. В шаблоне конфигурационного файла `templates/vector.j2` задаются источники данных (в указанной роли указан  dummy_logs, позволяющий генерировать данные в учебных и исследовательских целях), endpoint (ip адрес и порт) и таблицы для хранение сгенерированных данных.
 
-Dependencies
+
+Зависимости
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+Для корректной работы понядорбится также установить СУБД Clickhouse (роль доступна по [ссылке](https://github.com/LeonidKhoroshev/clickhouse-role)) и графический интерфейл Lighthouse (роль доступна по [ссылке](https://github.com/LeonidKhoroshev/lighthouse) ). В сулчае, если базы данных, Vector и Lighthouse предполагается устанавливать на разных хостах, также потребуется веб-сервер (роль для установки Nginx доступна по [ссылке](https://github.com/LeonidKhoroshev/nginx)).
 
-Example Playbook
+Пример плейбука
 ----------------
+
+Установить роль можно через ansible-galaxy:
+```
+ansible-galaxy install -r requirements.yml
+```
+
+указав в файле requirements.yml cледующее содержание:
+```
+  - src: https://github.com/LeonidKhoroshev/vector
+    scm: git
+    name: lighthouse
+```
+
+Далее вписываем роль в плейбук:
+```
+- name: Install Vector
+  hosts: vector
+  remote_user: leo
+  become: true
+  roles:
+    - vector-role
+```
+
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
@@ -27,12 +51,3 @@ Including an example of how to use your role (for instance, with variables passe
       roles:
          - { role: username.rolename, x: 42 }
 
-License
--------
-
-BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
