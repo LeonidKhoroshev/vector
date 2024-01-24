@@ -32,7 +32,7 @@ ansible-galaxy install -r requirements.yml
 ```
   - src: https://github.com/LeonidKhoroshev/vector
     scm: git
-    name: lighthouse
+    name: vector
 ```
 
 Далее вписываем роль в плейбук:
