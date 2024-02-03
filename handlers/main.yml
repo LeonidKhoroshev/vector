@@ -2,7 +2,6 @@
 # handlers file for vector-role
 
 - name: Start Vector
-  remote_user: leo
   become: true
   ansible.builtin.systemd:
     daemon_reload: true

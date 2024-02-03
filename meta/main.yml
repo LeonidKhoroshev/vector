@@ -55,4 +55,4 @@ galaxy_info:
   role_name: vector
   namespace: glennbell
 
-role_name_check: 1
+# role_name_check: 1

@@ -2,13 +2,13 @@
 - name: Get Vector distrib
   ansible.builtin.get_url:
     url: https://packages.timber.io/vector/0.35.0/vector-0.35.0-1.x86_64.rpm
-    dest: /home/leo/vector-0.35.0-1.x86_64.rpm
+    dest: /home/vector-0.35.0-1.x86_64.rpm
     mode: "0777"
 - name: Install Vector
   become: true
   ansible.builtin.copy:
     remote_src: true
-    src: "/home/leo/"
+    src: "/home"
     dest: "/usr/bin/"
     mode: "0777"
     owner: root
@@ -24,7 +24,7 @@
 - name: Vector | Template config
   become: true
   ansible.builtin.template:
-    src: template/vector.j2
+    src: templates/vector.j2
     dest: /etc/vector/vector.yml
     mode: "0777"
     owner: root
@@ -32,7 +32,7 @@
 - name: Vector | Create systemd unit
   become: true
   ansible.builtin.template:
-    src: template/vector.j2
+    src: templates/vector.j2
     dest: /etc/systemd/system/vector.service
     mode: "0777"
     owner: root
